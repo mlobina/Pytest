@@ -26,3 +26,16 @@ def send_company_email(request: Request) -> Response:
     )
     return Response({'status': 'success', 'info': 'email sent successfully'}, status=200)
 
+
+@api_view(http_method_names=['GET'])
+def get_the_fibonacci_number(request: Request) -> Response:
+    """Gets the n'th fibonacci number."""
+    n = int(request.GET.get('n'))
+
+    fib_lst = [0, 1]
+    for i in range(1, n + 1):
+        fib_lst.append(fib_lst[i] + fib_lst[i - 1])
+    return Response({'fibonacci_number': f'{fib_lst[n]}'})
+
+
+
